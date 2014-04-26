@@ -10,6 +10,7 @@ package uk.co.zutty.ld29 {
 
         public function Darkness() {
             graphic = _lightMap;
+            layer = 100;
         }
 
         public function set flipped(value:Boolean):void {
