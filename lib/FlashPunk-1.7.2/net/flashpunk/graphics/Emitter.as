@@ -2,7 +2,8 @@
 {
 	import flash.display.BitmapData;
 	import flash.geom.ColorTransform;
-	import flash.geom.Point;
+    import flash.geom.Point;
+    import flash.geom.Point;
 	import flash.geom.Rectangle;
 
 	import net.flashpunk.FP;
@@ -110,6 +111,8 @@
 				td = (type._ease == null) ? t : type._ease(t);
 				_p.x = _point.x + p._x + p._moveX * td;
 				_p.y = _point.y + p._y + p._moveY * td + p._gravity * td * td;
+
+                updateParticle(_p, p);
 				
 				// get frame
 				rect.x = rect.width * type._frames[uint(td * type._frameCount)];
@@ -141,6 +144,8 @@
 				p = p._next;
 			}
 		}
+
+        public function updateParticle(point:Point, p:Particle):void {}
 		
 		/**
 		 * Creates a new Particle type for this Emitter.

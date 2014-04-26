@@ -12,6 +12,10 @@
 		{
 			
 		}
+
+        public function kill():void {
+            _time = _duration;
+        }
 		
 		// Particle information.
 		/** @private */ internal var _type:ParticleType;

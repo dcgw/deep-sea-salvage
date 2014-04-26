@@ -29,6 +29,9 @@ package uk.co.zutty.ld29 {
 
             layer = 200;
 
+            setHitbox(16, 16, 8, 8);
+            type = "submarine";
+
             Input.define("left", Key.LEFT, Key.A);
             Input.define("right", Key.RIGHT, Key.D);
             Input.define("up", Key.UP, Key.W);
@@ -67,8 +70,8 @@ package uk.co.zutty.ld29 {
                 _bubbleEmitter.emitBubbles(_spritemap.flipped, 6, -10, -2);
             }
 
-            if(y < 0) {
-                y = 0;
+            if(y < 2) {
+                y = 2;
             } else if(y > GameWorld.MAX_DEPTH) {
                 y = GameWorld.MAX_DEPTH;
             }

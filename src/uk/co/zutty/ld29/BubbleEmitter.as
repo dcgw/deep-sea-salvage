@@ -1,5 +1,10 @@
 package uk.co.zutty.ld29 {
+    import flash.geom.Point;
+
+    import net.flashpunk.FP;
+
     import net.flashpunk.graphics.Emitter;
+    import net.flashpunk.graphics.Particle;
 
     public class BubbleEmitter extends Emitter {
 
@@ -20,6 +25,13 @@ package uk.co.zutty.ld29 {
 
         public function emitBubbles(flipped:Boolean, x:Number, xFlipped:Number, y:Number):void {
             emit(flipped ? "bubble_left" : "bubble_right", flipped ? xFlipped : x, y);
+        }
+
+        override public function updateParticle(point:Point, p:Particle):void {
+            trace(point.y - FP.camera.y);
+            if(point.y + FP.camera.y - 3 <= 0) {
+                p.kill();
+            }
         }
     }
 }

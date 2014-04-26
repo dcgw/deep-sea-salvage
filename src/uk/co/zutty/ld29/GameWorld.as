@@ -1,5 +1,6 @@
 package uk.co.zutty.ld29 {
-    import net.flashpunk.Entity;
+    import flash.geom.Point;
+
     import net.flashpunk.FP;
     import net.flashpunk.World;
     import net.flashpunk.tweens.misc.MultiVarTween;
@@ -19,6 +20,12 @@ package uk.co.zutty.ld29 {
             _player.y = FP.halfHeight;
             add(_player);
             add(_darkness);
+
+            add(new Sky());
+            add(new Waves());
+
+            add(new Enemy());
+
             addTween(_cameraTween, true);
         }
 
