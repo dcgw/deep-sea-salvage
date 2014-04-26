@@ -1,5 +1,6 @@
 package uk.co.zutty.ld29 {
     import net.flashpunk.Entity;
+    import net.flashpunk.Entity;
     import net.flashpunk.FP;
     import net.flashpunk.graphics.Spritemap;
 
@@ -56,6 +57,12 @@ package uk.co.zutty.ld29 {
                 if(entity) {
                     FP.world.recycle(this);
                     (entity as Destructable).hit(1);
+                    if(y > -5) {
+                        var explosion:UnderwaterExplosion = FP.world.create(UnderwaterExplosion) as UnderwaterExplosion;
+                        explosion.x = x;
+                        explosion.y = y;
+                        explosion.trigger();
+                    }
                 }
             }
         }

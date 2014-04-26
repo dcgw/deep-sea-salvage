@@ -22,7 +22,9 @@ package uk.co.zutty.ld29 {
             add(new Sky());
             add(new Waves());
 
-            add(new Enemy());
+            var enemy:Enemy = new Enemy();
+            enemy.y = 100;
+            add(enemy);
 
             addTween(_cameraTween, true);
         }
