@@ -51,6 +51,8 @@ package uk.co.zutty.ld29 {
 
             if(y < 0) {
                 y = 0;
+            } else if(y > GameWorld.MAX_DEPTH) {
+                y = GameWorld.MAX_DEPTH;
             }
         }
     }

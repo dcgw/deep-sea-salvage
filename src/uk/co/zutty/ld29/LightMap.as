@@ -19,14 +19,10 @@ package uk.co.zutty.ld29 {
         private var _lightMap:BitmapData = new BitmapData(FP.width + MARGIN, FP.height + MARGIN, true, 0);
         private var _lightMapRect:Rectangle = _lightMap.rect;
 
-        public function LightMap() {
-            updateLightMap();
-        }
-
-        public function updateLightMap():void {
+        public function updateLightMap(startAlpha:Number, endAlpha:Number):void {
             var type:String = GradientType.LINEAR;
             var colors:Array = [0x000000, 0x000000];
-            var alphas:Array = [0, 1];
+            var alphas:Array = [startAlpha, endAlpha];
             var ratios:Array = [0, 255];
             var spreadMethod:String = SpreadMethod.PAD;
             var interp:String = InterpolationMethod.LINEAR_RGB;
