@@ -7,7 +7,7 @@ package uk.co.zutty.ld29 {
     import net.flashpunk.utils.Input;
     import net.flashpunk.utils.Key;
 
-    public class Player extends Entity {
+    public class Player extends Entity implements Destructable {
 
         [Embed(source="/player_sub.png")]
         private static const PLAYER_SUB_IMAGE:Class;
@@ -18,6 +18,7 @@ package uk.co.zutty.ld29 {
         private var _spritemap:Spritemap = new Spritemap(PLAYER_SUB_IMAGE, 16, 16);
         private var _bubbleEmitter:BubbleEmitter = new BubbleEmitter();
         private var _fireTimer:uint = RATE_OF_FIRE;
+        private var _health:int = 2;
 
         public function Player() {
             _spritemap.add("idle", [1], 1, false);
@@ -29,14 +30,18 @@ package uk.co.zutty.ld29 {
 
             layer = 200;
 
-            setHitbox(16, 16, 8, 8);
-            type = "submarine";
+            setHitbox(10, 10, 5, 5);
+            type = "destructable";
 
             Input.define("left", Key.LEFT, Key.A);
             Input.define("right", Key.RIGHT, Key.D);
             Input.define("up", Key.UP, Key.W);
             Input.define("down", Key.DOWN, Key.S);
             Input.define("fire", Key.SPACE, Key.X);
+        }
+
+        public function hit(damage:int):void {
+            _health -= damage;
         }
 
         public function get flipped():Boolean {

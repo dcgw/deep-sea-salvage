@@ -1,8 +1,9 @@
 package uk.co.zutty.ld29 {
     import net.flashpunk.Entity;
+    import net.flashpunk.FP;
     import net.flashpunk.graphics.Spritemap;
 
-    public class Enemy extends Entity {
+    public class Enemy extends Entity implements Destructable {
 
         [Embed(source="/baddie_sub.png")]
         private static const BADDIE_SUB_IMAGE:Class;
@@ -24,8 +25,12 @@ package uk.co.zutty.ld29 {
 
             layer = 400;
 
-            setHitbox(16, 16, 8, 8);
-            type = "submarine";
+            setHitbox(10, 10, 5, 5);
+            type = "destructable";
+        }
+
+        public function hit(damage:int):void {
+            FP.world.recycle(this);
         }
     }
 }

@@ -1,6 +1,4 @@
 package uk.co.zutty.ld29 {
-    import flash.geom.Point;
-
     import net.flashpunk.FP;
     import net.flashpunk.World;
     import net.flashpunk.tweens.misc.MultiVarTween;
@@ -17,7 +15,7 @@ package uk.co.zutty.ld29 {
 
         public function GameWorld() {
             _player.x = FP.halfWidth;
-            _player.y = FP.halfHeight;
+            _player.y = 0;
             add(_player);
             add(_darkness);
 
