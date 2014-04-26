@@ -40,6 +40,10 @@ package uk.co.zutty.ld29 {
             Input.define("down", Key.DOWN, Key.S);
         }
 
+        public function get flipped():Boolean {
+            return _spritemap.flipped;
+        }
+
         override public function update():void {
             var moved:Boolean = false;
 

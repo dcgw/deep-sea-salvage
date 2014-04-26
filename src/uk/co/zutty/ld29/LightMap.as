@@ -1,9 +1,13 @@
 package uk.co.zutty.ld29 {
+    import flash.display.Bitmap;
     import flash.display.BitmapData;
+    import flash.display.BitmapData;
+    import flash.display.BlendMode;
     import flash.display.GradientType;
     import flash.display.InterpolationMethod;
     import flash.display.Shape;
     import flash.display.SpreadMethod;
+    import flash.geom.ColorTransform;
     import flash.geom.Matrix;
     import flash.geom.Point;
     import flash.geom.Rectangle;
@@ -14,12 +18,17 @@ package uk.co.zutty.ld29 {
 
     public class LightMap extends Graphic {
 
+        [Embed(source="/lamp_lightmap.png")]
+        private static const LAMP_LIGHTMAP_IMAGE:Class;
+
         private static const MARGIN:int = 30;
+
+        private var _lampBitmap:Bitmap = new Bitmap(FP.getBitmap(LAMP_LIGHTMAP_IMAGE));
 
         private var _lightMap:BitmapData = new BitmapData(FP.width + MARGIN, FP.height + MARGIN, true, 0);
         private var _lightMapRect:Rectangle = _lightMap.rect;
 
-        public function updateLightMap(startAlpha:Number, endAlpha:Number):void {
+        public function updateLightMap(startAlpha:Number, endAlpha:Number, flipped:Boolean):void {
             var type:String = GradientType.LINEAR;
             var colors:Array = [0x000000, 0x000000];
             var alphas:Array = [startAlpha, endAlpha];
@@ -41,6 +50,15 @@ package uk.co.zutty.ld29 {
 
             _lightMap.fillRect(_lightMapRect, 0);
             _lightMap.draw(shape);
+
+            FP.matrix.identity();
+            FP.matrix.tx = _lightMapRect.width / 2;
+            var offX = _lampBitmap.width + 6;
+            FP.matrix.tx += flipped ? offX : -offX;
+            FP.matrix.ty = -(_lampBitmap.height / 2) + (_lightMapRect.height / 2) + 2;
+            FP.matrix.a = flipped ? -1 : 1;
+
+            _lightMap.draw(_lampBitmap, FP.matrix, null, BlendMode.ERASE);
         }
 
         override public function render(target:BitmapData, point:Point, camera:Point):void {
