@@ -3,6 +3,8 @@ package uk.co.zutty.ld29 {
     import net.flashpunk.FP;
     import net.flashpunk.graphics.Spritemap;
 
+    import uk.co.zutty.ld29.SalvageFloater;
+
     public class Treasure extends Entity implements Salvage {
 
         [Embed(source="/treasure.png")]
@@ -74,6 +76,7 @@ package uk.co.zutty.ld29 {
             } else {
                 _spritemap.play("open_empty");
                 _claimed = true;
+                SalvageFloater.show(x,  y - 8, _value);
                 return _value;
             }
         }

@@ -89,6 +89,7 @@ package uk.co.zutty.ld29 {
 
         public function claim():int {
             _salvageClaimed = true;
+            SalvageFloater.show(x,  y - 8, SALVAGE_VALUE);
             return SALVAGE_VALUE;
         }
 
