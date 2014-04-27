@@ -21,21 +21,20 @@ package uk.co.zutty.ld29 {
         public function GameWorld() {
             var ogmoLevel:OgmoLoader = new OgmoLoader();
             add(ogmoLevel.terrain);
+            for each(var enemy:Enemy in ogmoLevel.enemies) {
+                add(enemy);
+            }
 
             _player.x = 1200;
             _player.y = 0;
             FP.camera.x = 1200;
             FP.camera.y = 0;
             add(_player);
+
             add(_darkness);
 
             add(new Sky());
             add(new Waves());
-
-            var enemy:Enemy = new Enemy();
-            enemy.x = 1200;
-            enemy.y = 100;
-            add(enemy);
 
             addTween(_cameraTween, true);
         }

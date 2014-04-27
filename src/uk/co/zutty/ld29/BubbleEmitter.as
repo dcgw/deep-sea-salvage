@@ -28,7 +28,6 @@ package uk.co.zutty.ld29 {
         }
 
         override public function updateParticle(point:Point, p:Particle):void {
-            trace(point.y - FP.camera.y);
             if(point.y + FP.camera.y - 3 <= 0) {
                 p.kill();
             }

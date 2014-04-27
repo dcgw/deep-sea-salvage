@@ -51,7 +51,7 @@ package uk.co.zutty.ld29 {
 
             FP.matrix.identity();
             FP.matrix.tx = _lightMapRect.width / 2;
-            var offX = _lampBitmap.width + 6;
+            var offX:Number = _lampBitmap.width + 6;
             FP.matrix.tx += flipped ? offX : -offX;
             FP.matrix.ty = -(_lampBitmap.height / 2) + (_lightMapRect.height / 2) + 2;
             FP.matrix.a = flipped ? -1 : 1;

@@ -14,9 +14,9 @@
 	<layers>  
 		<tiles name="parallax" gridSize="24"/>
 		<tiles name="background" gridSize="24"/>
-		<tiles name="ground" gridSize="24"/>
+		<tiles name="terrain" gridSize="24"/>
 		<tiles name="foreground" gridSize="24"/>
-		<objects name="overlay" gridSize="24"/>
+		<objects name="objects" gridSize="24"/>
 	</layers>
 	<tilesets> 
 		<tileset name="tiles" image="tiles.png" tileWidth="24" tileHeight="24"/>

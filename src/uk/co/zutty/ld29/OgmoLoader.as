@@ -2,6 +2,7 @@ package uk.co.zutty.ld29 {
     import flash.utils.ByteArray;
 
     import net.flashpunk.Entity;
+    import net.flashpunk.FP;
     import net.flashpunk.graphics.Tilemap;
     import net.flashpunk.masks.Grid;
 
@@ -12,7 +13,6 @@ package uk.co.zutty.ld29 {
         [Embed(source="/tiles.png")]
         private static const TILES_IMAGE:Class;
 
-        private static const TERRAIN_LAYER_NAME:String = "ground";
         private static const TILE_SIZE:int = 24;
 
         private var _xmlData:XML;
@@ -28,7 +28,7 @@ package uk.co.zutty.ld29 {
             var tilemap:Tilemap = new Tilemap(TILES_IMAGE, _xmlData.width, _xmlData.height, TILE_SIZE, TILE_SIZE);
             var grid:Grid = new Grid(_xmlData.width, _xmlData.height, TILE_SIZE, TILE_SIZE);
 
-            for each(var tile:XML in _xmlData[TERRAIN_LAYER_NAME][0].tile) {
+            for each(var tile:XML in _xmlData["terrain"][0].tile) {
                 var idx:uint = tilemap.getIndex(tile.@tx / TILE_SIZE, tile.@ty / TILE_SIZE);
                 tilemap.setTile(tile.@x / TILE_SIZE, tile.@y / TILE_SIZE, idx);
                 grid.setTile(tile.@x / TILE_SIZE, tile.@y / TILE_SIZE);
@@ -40,6 +40,19 @@ package uk.co.zutty.ld29 {
             terrain.layer = 600;
 
             return terrain;
+        }
+
+        public function get enemies():Vector.<Enemy> {
+            var enemies:Vector.<Enemy> = new Vector.<Enemy>();
+
+            for each(var obj:XML in _xmlData["objects"][0].enemy) {
+                var enemy:Entity = FP.world.create(Enemy, false);
+                enemy.x = obj.@x;
+                enemy.y = obj.@y;
+                enemies.push(enemy);
+            }
+
+            return enemies;
         }
     }
 }
