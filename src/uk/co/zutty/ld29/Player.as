@@ -4,6 +4,8 @@ package uk.co.zutty.ld29 {
     import net.flashpunk.FP;
     import net.flashpunk.graphics.Emitter;
     import net.flashpunk.graphics.Spritemap;
+    import net.flashpunk.tweens.misc.VarTween;
+    import net.flashpunk.utils.Ease;
     import net.flashpunk.utils.Input;
     import net.flashpunk.utils.Key;
 
@@ -22,14 +24,20 @@ package uk.co.zutty.ld29 {
 
         private var _health:int = STARTING_HEALTH;
         private var _salvage:int = 0;
+        private var _dead:Boolean = false;
+        public var _sinkSpeed:Number = 0;
+        private var _sinkSpeedTween:VarTween = new VarTween();
 
         public function Player() {
             _spritemap.add("idle", [1], 1, false);
             _spritemap.add("spin", [0,1,2,1], 0.6);
+            _spritemap.add("dead", [3], 1, false);
             _spritemap.play("idle");
             _spritemap.centerOrigin();
             addGraphic(_spritemap);
             addGraphic(_bubbleEmitter);
+
+            addTween(_sinkSpeedTween);
 
             layer = 200;
 
@@ -44,19 +52,51 @@ package uk.co.zutty.ld29 {
             Input.define("salvage", Key.SHIFT, Key.C);
         }
 
+        override public function added():void {
+            _sinkSpeed = 0;
+            _health = STARTING_HEALTH;
+            _dead = false;
+        }
+
         public function get salvage():int {
             return _salvage;
         }
 
+        public function get health():int {
+            return _health;
+        }
+
+        public function get dead():Boolean {
+            return _dead;
+        }
+
         public function hit(damage:int):void {
             _health -= damage;
+            if(_health <= 0) {
+                _dead = true;
+                _spritemap.play("dead");
+                _sinkSpeedTween.tween(this, "_sinkSpeed", 0.5, 100, Ease.quadIn);
+                _sinkSpeedTween.start();
+            }
         }
 
         public function get flipped():Boolean {
             return _spritemap.flipped;
         }
 
+        override public function moveCollideY(e:Entity):Boolean {
+            if(_dead) {
+                active = false;
+            }
+            return true;
+        }
+
         override public function update():void {
+            if(_dead) {
+                moveBy(0, _sinkSpeed, "terrain");
+                return;
+            }
+
             var moved:Boolean = false;
             var mx:Number = 0;
             var my:Number = 0;

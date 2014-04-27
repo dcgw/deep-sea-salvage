@@ -103,16 +103,16 @@ package uk.co.zutty.ld29 {
                 var dist:Number = distanceFrom(player);
                 var yDist:Number = player.y - y;
 
-                if(spawnDist > RETREAT_RANGE && !(x == _spawnX && y == _spawnY)) {
+                if((spawnDist > RETREAT_RANGE || player.dead) && !(x == _spawnX && y == _spawnY)) {
                     _moveTowards(_spawnX,  _spawnY);
-                } else if(dist <= AGGRO_RANGE && dist > CLOSE_RANGE) {
+                } else if(dist <= AGGRO_RANGE && dist > CLOSE_RANGE && !player.dead) {
                     _moveTowards(player.x,  player.y);
-                } else if(dist <= AGGRO_RANGE) {
+                } else if(dist <= AGGRO_RANGE && !player.dead) {
                     _moveTowards(x, player.y);
                     _spritemap.flipped = x < player.x;
                 }
 
-                if(_fireTimer > RATE_OF_FIRE && dist <= FIRE_RANGE && yDist <= Y_ALIGN_RANGE) {
+                if(_fireTimer > RATE_OF_FIRE && dist <= FIRE_RANGE && yDist <= Y_ALIGN_RANGE && !player.dead) {
                     _fireTimer = 0;
                     var torpedo:Torpedo = FP.world.create(Torpedo) as Torpedo;
                     torpedo.x = x;

@@ -19,6 +19,8 @@ package uk.co.zutty.ld29 {
         private var _darkness:Darkness = new Darkness();
         private var _cameraTween:MultiVarTween = new MultiVarTween();
 
+        private var _hud:Hud = new Hud();
+
         public function GameWorld() {
             var ogmoLevel:OgmoLoader = new OgmoLoader();
             add(ogmoLevel.terrain);
@@ -28,16 +30,19 @@ package uk.co.zutty.ld29 {
 
             _player.x = 1200;
             _player.y = 0;
-            FP.camera.x = 1200;
-            FP.camera.y = 0;
             add(_player);
 
             add(_darkness);
-
+            add(_hud);
             add(new Sky());
             add(new Waves());
 
             addTween(_cameraTween, true);
+        }
+
+        override public function begin():void {
+            FP.camera.x = 1200 - FP.halfWidth;
+            FP.camera.y = -FP.halfHeight;
         }
 
         public function get player():Player {
@@ -46,6 +51,8 @@ package uk.co.zutty.ld29 {
 
         override public function update():void {
             super.update();
+
+            _hud.health = _player.health;
 
             _darkness.x = _player.x;
             _darkness.y = _player.y;
