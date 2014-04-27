@@ -22,9 +22,6 @@ package uk.co.zutty.ld29 {
         private static const RETREAT_RANGE:Number = 200;
         private static const Y_ALIGN_RANGE:Number = 16;
 
-        private static const STATE_IDLE:int = 0;
-        private static const STATE_ATTACK:int = 0;
-
         private var _spritemap:Spritemap = new Spritemap(BADDIE_SUB_IMAGE, 16, 16);
         private var _bubbleEmitter:BubbleEmitter = new BubbleEmitter();
         private var _fireTimer:uint = RATE_OF_FIRE;
@@ -33,7 +30,6 @@ package uk.co.zutty.ld29 {
         private var _sinkSpeedTween:VarTween = new VarTween();
         private var _spawnX:Number = 0;
         private var _spawnY:Number = 0;
-        private var _state:int = STATE_IDLE;
 
         public function Enemy() {
             _spritemap.add("idle", [1], 1, false);
