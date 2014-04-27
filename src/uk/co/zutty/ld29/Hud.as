@@ -5,6 +5,7 @@ package uk.co.zutty.ld29 {
     import net.flashpunk.graphics.Image;
     import net.flashpunk.graphics.Spritemap;
     import net.flashpunk.graphics.Text;
+    import net.flashpunk.tweens.misc.VarTween;
 
     public class Hud extends Entity {
 
@@ -17,6 +18,8 @@ package uk.co.zutty.ld29 {
         [Embed(source="/coin_icon.png")]
         private static const COIN_IMAGE:Class;
 
+        private static const YOU_CANT_GO_THAT_WAY_DELAY:uint = 100;
+
         private var _healthSpritemap1:Spritemap = new Spritemap(HEALTH_INDICATOR_IMAGE, 8, 8);
         private var _healthSpritemap2:Spritemap = new Spritemap(HEALTH_INDICATOR_IMAGE, 8, 8);
         private var _healthSpritemap3:Spritemap = new Spritemap(HEALTH_INDICATOR_IMAGE, 8, 8);
@@ -27,6 +30,10 @@ package uk.co.zutty.ld29 {
         private var _interactList:Graphiclist = new Graphiclist();
 
         private var _salvageText:Text = new Text("0000000");
+
+        private var _youCantGoThatWayText:Text = new Text("You can't go that way");
+        private var _youCantGoThatWayTween:VarTween = new VarTween();
+        private var _youCantGoThatWayTimer:uint = 0;
 
         public function Hud() {
             _healthSpritemap1.add("full", [0], 1, false);
@@ -100,6 +107,13 @@ package uk.co.zutty.ld29 {
             _gameOverList.visible = false;
             addGraphic(_gameOverList);
 
+            _youCantGoThatWayText.size = 8;
+            _youCantGoThatWayText.x = FP.halfWidth - 50;
+            _youCantGoThatWayText.y = FP.halfHeight + 25;
+            _youCantGoThatWayText.visible = false;
+            addGraphic(_youCantGoThatWayText);
+            addTween(_youCantGoThatWayTween, false);
+
             graphic.scrollX = 0;
             graphic.scrollY = 0;
 
@@ -133,6 +147,27 @@ package uk.co.zutty.ld29 {
 
         public function set showInteract(value:Boolean):void {
             _interactList.visible = value;
+        }
+
+        public function showYouCantGoThatWay():void {
+            _youCantGoThatWayTimer = 0;
+            _youCantGoThatWayText.alpha = 1;
+            _youCantGoThatWayText.visible = true;
+        }
+
+        public function hideYouCantGoThatWay():void {
+            _youCantGoThatWayText.visible = false;
+        }
+
+        override public function update():void {
+            if(_youCantGoThatWayText.visible) {
+                _youCantGoThatWayTimer++;
+                if(_youCantGoThatWayTimer > YOU_CANT_GO_THAT_WAY_DELAY) {
+                    _youCantGoThatWayTween.tween(_youCantGoThatWayText, "alpha", 0, 20);
+                    _youCantGoThatWayTween.complete = hideYouCantGoThatWay;
+                    _youCantGoThatWayTween.start();
+                }
+            }
         }
     }
 }

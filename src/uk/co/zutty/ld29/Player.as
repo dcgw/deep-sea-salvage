@@ -134,6 +134,8 @@ package uk.co.zutty.ld29 {
 
             moveBy(mx, my, "terrain");
 
+            var hud:Hud = (FP.world as GameWorld).hud;
+
             if(y < GameWorld.SURFACE_DEPTH) {
                 y = GameWorld.SURFACE_DEPTH;
             } else if(y > GameWorld.MAX_DEPTH) {
@@ -141,11 +143,12 @@ package uk.co.zutty.ld29 {
             }
             if(x < GameWorld.WEST_BORDER) {
                 x = GameWorld.WEST_BORDER;
+                hud.showYouCantGoThatWay();
             } else if(x > GameWorld.EAST_BORDER) {
                 x = GameWorld.EAST_BORDER;
+                hud.showYouCantGoThatWay();
             }
 
-            var hud:Hud = (FP.world as GameWorld).hud;
             hud.showInteract = false;
 
             var salvage:Salvage = collide("salvage", x, y) as Salvage;
