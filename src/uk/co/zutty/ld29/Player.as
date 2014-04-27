@@ -78,6 +78,10 @@ package uk.co.zutty.ld29 {
         }
 
         public function hit(damage:int):void {
+            if(!active) {
+                return;
+            }
+
             _health -= damage;
             if(_health <= 0) {
                 _dead = true;

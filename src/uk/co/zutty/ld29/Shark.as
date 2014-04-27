@@ -4,22 +4,22 @@ package uk.co.zutty.ld29 {
     import net.flashpunk.tweens.misc.VarTween;
     import net.flashpunk.utils.Ease;
 
-    public class Whale extends Entity implements Destructable {
+    public class Shark extends Entity implements Destructable {
 
-        [Embed(source="/whale.png")]
-        private static const WHALE_IMAGE:Class;
+        [Embed(source="/shark.png")]
+        private static const SHARK_IMAGE:Class;
 
-        private static const SPEED:Number = 0.1;
-        private static const WEST_RANGE:Number = 1400;
-        private static const EAST_RANGE:Number = 2300;
+        private static const IDLE_SPEED:Number = 0.3;
+        private static const PURSUE_SPEED:Number = 0.8;
 
-        private var _spritemap:Spritemap = new Spritemap(WHALE_IMAGE, 96, 32);
+        private var _spritemap:Spritemap = new Spritemap(SHARK_IMAGE, 64, 24);
         private var _dead:Boolean = false;
         public var _sinkSpeed:Number = 0;
         private var _sinkSpeedTween:VarTween = new VarTween();
 
-        public function Whale() {
-            _spritemap.add("swim", [0,1,2,3,4,5,4,3,2,1], 0.1);
+        public function Shark() {
+            _spritemap.add("swim", [0,1,2,1,0,3,4,3], 0.1);
+            _spritemap.add("bite", [5,0], 0.2, false);
             _spritemap.add("dead_sinking", [6], 1, false);
             _spritemap.add("dead", [7], 1, false);
             _spritemap.play("swim");
@@ -29,7 +29,7 @@ package uk.co.zutty.ld29 {
             addTween(_sinkSpeedTween);
 
             layer = 400;
-            setHitbox(60, 24, 30, 12);
+            setHitbox(50, 20, 25, 10);
             type = "destructable";
         }
 
@@ -62,13 +62,8 @@ package uk.co.zutty.ld29 {
             if(_dead) {
                 moveBy(0, _sinkSpeed, "terrain");
             } else {
-                moveBy(_spritemap.flipped ? SPEED : -SPEED, 0, "terrain");
+                moveBy(_spritemap.flipped ? IDLE_SPEED : -IDLE_SPEED, 0, "terrain");
 
-                if(x < WEST_RANGE && !_spritemap.flipped) {
-                    _spritemap.flipped = true;
-                } else if(x > EAST_RANGE && _spritemap.flipped) {
-                    _spritemap.flipped = false;
-                }
             }
         }
     }

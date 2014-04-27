@@ -63,6 +63,10 @@ package uk.co.zutty.ld29 {
         }
 
         public function hit(damage:int):void {
+            if(!active) {
+                return;
+            }
+
             _dead = true;
             _spritemap.play("dead");
             _sinkSpeedTween.tween(this, "_sinkSpeed", 0.5, 100, Ease.quadIn);
