@@ -613,12 +613,13 @@ package net.flashpunk
 		 */
 		public function moveBy(x:Number, y:Number, solidType:Object = null, sweep:Boolean = false):void
 		{
+            /*
 			_moveX += x;
 			_moveY += y;
-			x = Math.round(_moveX);
-			y = Math.round(_moveY);
+			//x = Math.round(_moveX);
+			//y = Math.round(_moveY);
 			_moveX -= x;
-			_moveY -= y;
+			_moveY -= y;*/
 			if (solidType)
 			{
 				var sign:int, e:Entity;

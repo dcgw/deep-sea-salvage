@@ -28,8 +28,7 @@ package uk.co.zutty.ld29 {
         }
 
         private function updateLightmap():void {
-            var depthVal = FP.clamp(_depth, 0.1, 0.9);
-            _lightMap.updateLightMap(depthVal - 0.1, depthVal + 0.1, _flipped);
+            _lightMap.updateLightMap(FP.clamp(_depth - 0.1, 0, 1), FP.clamp(_depth + 0.1, 0, 1), _flipped);
         }
     }
 }

@@ -9,7 +9,8 @@ package uk.co.zutty.ld29 {
         private static const CAMERA_TWEEN_DELAY:Number = 6;
 
         public static const SURFACE_DEPTH:Number = 2;
-        public static const MAX_DEPTH:Number = 1000;
+        public static const MAX_DEPTH:Number = 1300;
+        public static const DARKNESS_DEPTH:Number = 1000;
         public static const WEST_BORDER:Number = 110;
         public static const EAST_BORDER:Number = 2400 - 110;
 
@@ -44,7 +45,7 @@ package uk.co.zutty.ld29 {
 
             _darkness.x = _player.x;
             _darkness.y = _player.y;
-            _darkness.depth = _player.y / MAX_DEPTH;
+            _darkness.depth = _player.y / DARKNESS_DEPTH;
             _darkness.flipped = _player.flipped;
 
             _cameraTween.tween(FP.camera, {x: _player.x - FP.halfWidth, y: _player.y - FP.halfHeight}, CAMERA_TWEEN_DELAY, Ease.quadInOut);

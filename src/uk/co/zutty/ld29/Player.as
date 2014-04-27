@@ -50,22 +50,24 @@ package uk.co.zutty.ld29 {
 
         override public function update():void {
             var moved:Boolean = false;
+            var mx:Number = 0;
+            var my:Number = 0;
 
             if(Input.check("left")) {
-                x -= SPEED;
+                mx = -SPEED;
                 moved = true;
                 _spritemap.flipped = false;
             } else if(Input.check("right")) {
-                x += SPEED;
+                mx = SPEED;
                 moved = true;
                 _spritemap.flipped = true;
             }
 
             if(Input.check("up")) {
-                y -= SPEED;
+                my = -SPEED;
                 moved = true;
             } else if(Input.check("down")) {
-                y += SPEED;
+                my = SPEED;
                 moved = true;
             }
 
@@ -74,6 +76,8 @@ package uk.co.zutty.ld29 {
             if(moved) {
                 _bubbleEmitter.emitBubbles(_spritemap.flipped, 6, -10, -2);
             }
+
+            moveBy(mx, my, "terrain");
 
             if(y < GameWorld.SURFACE_DEPTH) {
                 y = GameWorld.SURFACE_DEPTH;
