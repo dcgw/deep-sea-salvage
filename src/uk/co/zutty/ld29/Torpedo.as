@@ -11,6 +11,7 @@ package uk.co.zutty.ld29 {
 
         private static const SPEED:Number = 2;
         private static const PRIME_DELAY:uint = 7;
+        private static const DESPAWN_DELAY:uint = 100;
 
         private var _spritemap:Spritemap = new Spritemap(TORPEDO_IMAGE, 8, 3);
         private var _bubbleEmitter:BubbleEmitter = new BubbleEmitter();
@@ -47,6 +48,10 @@ package uk.co.zutty.ld29 {
             _bubbleEmitter.emitBubbles(_flipped, 3, -7, -2);
 
             ++_timer;
+
+            if(_timer > DESPAWN_DELAY) {
+                FP.world.recycle(this);
+            }
 
             if(!_primed && _timer >= PRIME_DELAY) {
                 _primed = true;
