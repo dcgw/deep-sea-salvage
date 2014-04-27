@@ -1,6 +1,7 @@
 package uk.co.zutty.ld29 {
     import net.flashpunk.Entity;
     import net.flashpunk.FP;
+    import net.flashpunk.graphics.Graphiclist;
     import net.flashpunk.graphics.Spritemap;
     import net.flashpunk.graphics.Text;
 
@@ -8,12 +9,14 @@ package uk.co.zutty.ld29 {
 
         [Embed(source="/health_indicator.png")]
         private static const HEALTH_INDICATOR_IMAGE:Class;
+        [Embed(source="/press_x.png")]
+        private static const PRESS_X_IMAGE:Class;
 
         private var _healthSpritemap1:Spritemap = new Spritemap(HEALTH_INDICATOR_IMAGE, 8, 8);
         private var _healthSpritemap2:Spritemap = new Spritemap(HEALTH_INDICATOR_IMAGE, 8, 8);
         private var _healthSpritemap3:Spritemap = new Spritemap(HEALTH_INDICATOR_IMAGE, 8, 8);
 
-        private var _gameOverText:Text = new Text("Game Over");
+        private var _gameOverList:Graphiclist = new Graphiclist();
 
         public function Hud() {
             _healthSpritemap1.add("empty", [0], 1, false);
@@ -21,8 +24,6 @@ package uk.co.zutty.ld29 {
             _healthSpritemap1.play("full");
             _healthSpritemap1.x = 179;
             _healthSpritemap1.y = 3;
-            _healthSpritemap1.scrollX = 0;
-            _healthSpritemap1.scrollY = 0;
             addGraphic(_healthSpritemap1);
 
             _healthSpritemap2.add("empty", [0], 1, false);
@@ -30,8 +31,6 @@ package uk.co.zutty.ld29 {
             _healthSpritemap2.play("full");
             _healthSpritemap2.x = 189;
             _healthSpritemap2.y = 3;
-            _healthSpritemap2.scrollX = 0;
-            _healthSpritemap2.scrollY = 0;
             addGraphic(_healthSpritemap2);
 
             _healthSpritemap3.add("empty", [0], 1, false);
@@ -39,17 +38,34 @@ package uk.co.zutty.ld29 {
             _healthSpritemap3.play("full");
             _healthSpritemap3.x = 199;
             _healthSpritemap3.y = 3;
-            _healthSpritemap3.scrollX = 0;
-            _healthSpritemap3.scrollY = 0;
             addGraphic(_healthSpritemap3);
 
-            _gameOverText.size = 24;
-            _gameOverText.x = FP.halfWidth - (_gameOverText.width / 2);
-            _gameOverText.y = FP.halfHeight - (_gameOverText.height / 2);
-            _gameOverText.scrollX = 0;
-            _gameOverText.scrollY = 0;
-            _gameOverText.visible = false;
-            addGraphic(_gameOverText);
+            var gameOverText:Text = new Text("Game Over");
+            gameOverText.size = 24;
+            gameOverText.centerOrigin();
+            gameOverText.x = FP.halfWidth;
+            gameOverText.y = FP.halfHeight;
+            _gameOverList.add(gameOverText);
+
+            var continueText:Text = new Text("Press    to continue");
+            continueText.size = 8;
+            continueText.centerOrigin();
+            continueText.x = FP.halfWidth + 40;
+            continueText.y = FP.halfHeight + 18;
+            _gameOverList.add(continueText);
+
+            var pressXToContinueSpritemap:Spritemap = new Spritemap(PRESS_X_IMAGE, 8, 8);
+            pressXToContinueSpritemap.add("press_x", [0,1], 0.03);
+            pressXToContinueSpritemap.play("press_x");
+            pressXToContinueSpritemap.x = FP.halfWidth - 20;
+            pressXToContinueSpritemap.y = FP.halfHeight + 10;
+            _gameOverList.add(pressXToContinueSpritemap);
+
+            _gameOverList.visible = false;
+            addGraphic(_gameOverList);
+
+            graphic.scrollX = 0;
+            graphic.scrollY = 0;
 
             layer = 10;
         }
@@ -60,7 +76,7 @@ package uk.co.zutty.ld29 {
             _healthSpritemap3.play(value >= 3 ? "full" : "empty");
 
             if(value <= 0) {
-                _gameOverText.visible = true;
+                _gameOverList.visible = true;
             }
         }
     }

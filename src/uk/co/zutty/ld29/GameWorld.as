@@ -4,6 +4,8 @@ package uk.co.zutty.ld29 {
     import net.flashpunk.World;
     import net.flashpunk.tweens.misc.MultiVarTween;
     import net.flashpunk.utils.Ease;
+    import net.flashpunk.utils.Input;
+    import net.flashpunk.utils.Key;
 
     public class GameWorld extends World {
 
@@ -60,6 +62,10 @@ package uk.co.zutty.ld29 {
             _darkness.flipped = _player.flipped;
 
             _cameraTween.tween(FP.camera, {x: _player.x - FP.halfWidth, y: _player.y - FP.halfHeight}, CAMERA_TWEEN_DELAY, Ease.quadInOut);
+
+            if(_player.dead && Input.pressed(Key.ANY)) {
+                FP.world = new GameWorld();
+            }
         }
     }
 }
