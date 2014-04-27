@@ -75,10 +75,15 @@ package uk.co.zutty.ld29 {
                 _bubbleEmitter.emitBubbles(_spritemap.flipped, 6, -10, -2);
             }
 
-            if(y < 2) {
-                y = 2;
+            if(y < GameWorld.SURFACE_DEPTH) {
+                y = GameWorld.SURFACE_DEPTH;
             } else if(y > GameWorld.MAX_DEPTH) {
                 y = GameWorld.MAX_DEPTH;
+            }
+            if(x < GameWorld.WEST_BORDER) {
+                x = GameWorld.WEST_BORDER;
+            } else if(x > GameWorld.EAST_BORDER) {
+                x = GameWorld.EAST_BORDER;
             }
 
             if(++_fireTimer > RATE_OF_FIRE && Input.pressed("fire")) {

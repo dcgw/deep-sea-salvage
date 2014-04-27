@@ -1,0 +1,27 @@
+<project>
+	<name>LD29: Beneath the Surface</name>
+	<settings>  
+		<defaultWidth>210</defaultWidth>
+		<defaultHeight>90</defaultHeight>
+		<minWidth>210</minWidth>
+		<minHeight>90</minHeight>
+		<maxWidth>5000</maxWidth>
+		<maxHeight>5000</maxHeight>
+	</settings>
+	<values>
+		<string name="title" default="LD29 level" maxChars="30" />
+	</values> 
+	<layers>  
+		<tiles name="parallax" gridSize="24"/>
+		<tiles name="background" gridSize="24"/>
+		<tiles name="ground" gridSize="24"/>
+		<tiles name="foreground" gridSize="24"/>
+		<objects name="overlay" gridSize="24"/>
+	</layers>
+	<tilesets> 
+		<tileset name="tiles" image="tiles.png" tileWidth="24" tileHeight="24"/>
+	</tilesets>   
+	<objects>
+		<object name="enemy" image="baddie_placeholder.png" width="16" height="16"/>
+	</objects>
+</project>

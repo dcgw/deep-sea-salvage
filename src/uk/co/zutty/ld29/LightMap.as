@@ -1,13 +1,11 @@
 package uk.co.zutty.ld29 {
     import flash.display.Bitmap;
     import flash.display.BitmapData;
-    import flash.display.BitmapData;
     import flash.display.BlendMode;
     import flash.display.GradientType;
     import flash.display.InterpolationMethod;
     import flash.display.Shape;
     import flash.display.SpreadMethod;
-    import flash.geom.ColorTransform;
     import flash.geom.Matrix;
     import flash.geom.Point;
     import flash.geom.Rectangle;
