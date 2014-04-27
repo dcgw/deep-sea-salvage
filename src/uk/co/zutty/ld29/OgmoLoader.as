@@ -58,6 +58,14 @@ package uk.co.zutty.ld29 {
                 entities.push(whale);
             }
 
+            for each(var obj:XML in _xmlData["objects"][0].treasure) {
+                var treasure:Treasure = FP.world.create(Treasure, false) as Treasure;
+                treasure.x = obj.@x;
+                treasure.y = obj.@y;
+                treasure.value = obj.@value;
+                entities.push(treasure);
+            }
+
             return entities;
         }
     }

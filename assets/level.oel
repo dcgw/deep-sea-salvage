@@ -799,5 +799,10 @@
     <enemy x="2064" y="1008"/>
     <enemy x="1680" y="624"/>
     <whale x="2232" y="216"/>
+    <treasure x="456" y="456" value="0"/>
+    <treasure x="1056" y="168" value="0"/>
+    <treasure x="1080" y="168" value="100"/>
+    <treasure x="1104" y="168" value="600"/>
+    <treasure x="1128" y="168" value="1200"/>
   </objects>
 </level>

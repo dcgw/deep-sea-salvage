@@ -14,11 +14,14 @@ package uk.co.zutty.ld29 {
 
         private static const SPEED:Number = 0.8;
         private static const RATE_OF_FIRE:uint = 20;
+        private static const STARTING_HEALTH:int = 3;
 
         private var _spritemap:Spritemap = new Spritemap(PLAYER_SUB_IMAGE, 16, 16);
         private var _bubbleEmitter:BubbleEmitter = new BubbleEmitter();
         private var _fireTimer:uint = RATE_OF_FIRE;
-        private var _health:int = 2;
+
+        private var _health:int = STARTING_HEALTH;
+        private var _salvage:int = 0;
 
         public function Player() {
             _spritemap.add("idle", [1], 1, false);
@@ -38,6 +41,11 @@ package uk.co.zutty.ld29 {
             Input.define("up", Key.UP, Key.W);
             Input.define("down", Key.DOWN, Key.S);
             Input.define("fire", Key.SPACE, Key.X);
+            Input.define("salvage", Key.SHIFT, Key.C);
+        }
+
+        public function get salvage():int {
+            return _salvage;
         }
 
         public function hit(damage:int):void {
@@ -88,6 +96,13 @@ package uk.co.zutty.ld29 {
                 x = GameWorld.WEST_BORDER;
             } else if(x > GameWorld.EAST_BORDER) {
                 x = GameWorld.EAST_BORDER;
+            }
+
+            if(Input.pressed("salvage")) {
+                var salvage:Salvage = collide("salvage", x, y) as Salvage;
+                if(salvage && !salvage.claimed) {
+                    _salvage += salvage.claim();
+                }
             }
 
             if(++_fireTimer > RATE_OF_FIRE && Input.pressed("fire")) {
