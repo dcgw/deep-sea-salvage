@@ -55,6 +55,7 @@ package uk.co.zutty.ld29 {
             super.update();
 
             _hud.health = _player.health;
+            _hud.salvage = _player.salvage;
 
             _darkness.x = _player.x;
             _darkness.y = _player.y;

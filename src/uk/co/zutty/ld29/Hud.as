@@ -2,6 +2,7 @@ package uk.co.zutty.ld29 {
     import net.flashpunk.Entity;
     import net.flashpunk.FP;
     import net.flashpunk.graphics.Graphiclist;
+    import net.flashpunk.graphics.Image;
     import net.flashpunk.graphics.Spritemap;
     import net.flashpunk.graphics.Text;
 
@@ -11,12 +12,16 @@ package uk.co.zutty.ld29 {
         private static const HEALTH_INDICATOR_IMAGE:Class;
         [Embed(source="/press_x.png")]
         private static const PRESS_X_IMAGE:Class;
+        [Embed(source="/coin_icon.png")]
+        private static const COIN_IMAGE:Class;
 
         private var _healthSpritemap1:Spritemap = new Spritemap(HEALTH_INDICATOR_IMAGE, 8, 8);
         private var _healthSpritemap2:Spritemap = new Spritemap(HEALTH_INDICATOR_IMAGE, 8, 8);
         private var _healthSpritemap3:Spritemap = new Spritemap(HEALTH_INDICATOR_IMAGE, 8, 8);
 
         private var _gameOverList:Graphiclist = new Graphiclist();
+
+        private var _salvageText:Text = new Text("0000000");
 
         public function Hud() {
             _healthSpritemap1.add("empty", [0], 1, false);
@@ -61,6 +66,16 @@ package uk.co.zutty.ld29 {
             pressXToContinueSpritemap.y = FP.halfHeight + 10;
             _gameOverList.add(pressXToContinueSpritemap);
 
+            var coinIcon:Image = new Image(COIN_IMAGE);
+            coinIcon.x = 3;
+            coinIcon.y = 3;
+            addGraphic(coinIcon);
+
+            _salvageText.size = 8;
+            _salvageText.x = 12;
+            _salvageText.y = 2;
+            addGraphic(_salvageText);
+
             _gameOverList.visible = false;
             addGraphic(_gameOverList);
 
@@ -78,6 +93,11 @@ package uk.co.zutty.ld29 {
             if(value <= 0) {
                 _gameOverList.visible = true;
             }
+        }
+
+        public function set salvage(value:int):void {
+            var strVal:String = "" + value;
+            _salvageText.text = "0000000".substring(0, 7 - strVal.length) + strVal;
         }
     }
 }
