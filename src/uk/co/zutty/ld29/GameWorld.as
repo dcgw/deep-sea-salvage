@@ -34,11 +34,6 @@ package uk.co.zutty.ld29 {
             _player.y = 0;
             add(_player);
 
-            var shark:Shark = new Shark();
-            shark.x = 1200;
-            shark.y = 100;
-            add(shark);
-
             add(_darkness);
             add(_hud);
             add(new Sky());

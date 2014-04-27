@@ -58,6 +58,12 @@ package uk.co.zutty.ld29 {
                 entities.push(whale);
             }
 
+            for each(var obj:XML in _xmlData["objects"][0].shark) {
+                var shark:Shark = FP.world.create(Shark, false) as Shark;
+                shark.spawn(obj.@x, obj.@y);
+                entities.push(shark);
+            }
+
             for each(var obj:XML in _xmlData["objects"][0].treasure) {
                 var treasure:Treasure = FP.world.create(Treasure, false) as Treasure;
                 treasure.x = obj.@x;
