@@ -31,7 +31,7 @@ package uk.co.zutty.ld29 {
             }
 
             _player.x = 1200;
-            _player.y = 0;
+            _player.y = 100;
             add(_player);
 
             add(_darkness);
@@ -70,7 +70,7 @@ package uk.co.zutty.ld29 {
             _cameraTween.tween(FP.camera, {x: _player.x - FP.halfWidth, y: _player.y - FP.halfHeight}, CAMERA_TWEEN_DELAY, Ease.quadInOut);
 
             if(_player.dead && Input.pressed(Key.ANY)) {
-                FP.world = new GameWorld();
+                FP.world = new TitleWorld();
             }
         }
     }

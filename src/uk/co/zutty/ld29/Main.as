@@ -13,7 +13,7 @@ package uk.co.zutty.ld29 {
             FP.console.enable();
             FP.console.debug = true;
 
-            FP.world = new GameWorld();
+            FP.world = new TitleWorld();
         }
     }
 }
