@@ -10,6 +10,8 @@ package uk.co.zutty.ld29 {
         private static const WHALE_IMAGE:Class;
 
         private static const SPEED:Number = 0.1;
+        private static const WEST_RANGE:Number = 1400;
+        private static const EAST_RANGE:Number = 2300;
 
         private var _spritemap:Spritemap = new Spritemap(WHALE_IMAGE, 96, 32);
         private var _dead:Boolean = false;
@@ -56,7 +58,13 @@ package uk.co.zutty.ld29 {
             if(_dead) {
                 moveBy(0, _sinkSpeed, "terrain");
             } else {
-                moveBy(-SPEED, 0, "terrain");
+                moveBy(_spritemap.flipped ? SPEED : -SPEED, 0, "terrain");
+
+                if(x < WEST_RANGE && !_spritemap.flipped) {
+                    _spritemap.flipped = true;
+                } else if(x > EAST_RANGE && _spritemap.flipped) {
+                    _spritemap.flipped = false;
+                }
             }
         }
     }

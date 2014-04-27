@@ -1,4 +1,5 @@
 package uk.co.zutty.ld29 {
+    import net.flashpunk.Entity;
     import net.flashpunk.FP;
     import net.flashpunk.World;
     import net.flashpunk.tweens.misc.MultiVarTween;
@@ -21,8 +22,8 @@ package uk.co.zutty.ld29 {
         public function GameWorld() {
             var ogmoLevel:OgmoLoader = new OgmoLoader();
             add(ogmoLevel.terrain);
-            for each(var enemy:Enemy in ogmoLevel.enemies) {
-                add(enemy);
+            for each(var entities:Entity in ogmoLevel.entities) {
+                add(entities);
             }
 
             _player.x = 1200;
@@ -30,11 +31,6 @@ package uk.co.zutty.ld29 {
             FP.camera.x = 1200;
             FP.camera.y = 0;
             add(_player);
-
-            var whale:Whale = new Whale();
-            whale.x = 1200;
-            whale.y = 100;
-            add(whale);
 
             add(_darkness);
 

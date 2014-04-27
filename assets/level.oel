@@ -798,5 +798,6 @@
     <enemy x="2160" y="1032"/>
     <enemy x="2064" y="1008"/>
     <enemy x="1680" y="624"/>
+    <whale x="2232" y="216"/>
   </objects>
 </level>

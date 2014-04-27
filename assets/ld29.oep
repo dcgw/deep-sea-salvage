@@ -23,5 +23,6 @@
 	</tilesets>   
 	<objects>
 		<object name="enemy" image="baddie_placeholder.png" width="16" height="16"/>
+		<object name="whale" image="whale_placeholder.png" width="96" height="32"/>
 	</objects>
 </project>

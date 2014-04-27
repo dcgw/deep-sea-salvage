@@ -42,16 +42,23 @@ package uk.co.zutty.ld29 {
             return terrain;
         }
 
-        public function get enemies():Vector.<Enemy> {
-            var enemies:Vector.<Enemy> = new Vector.<Enemy>();
+        public function get entities():Vector.<Entity> {
+            var entities:Vector.<Entity> = new Vector.<Entity>();
 
             for each(var obj:XML in _xmlData["objects"][0].enemy) {
                 var enemy:Enemy = FP.world.create(Enemy, false) as Enemy;
                 enemy.spawn(obj.@x, obj.@y);
-                enemies.push(enemy);
+                entities.push(enemy);
             }
 
-            return enemies;
+            for each(var obj:XML in _xmlData["objects"][0].whale) {
+                var whale:Whale = FP.world.create(Whale, false) as Whale;
+                whale.x = obj.@x;
+                whale.y = obj.@y;
+                entities.push(whale);
+            }
+
+            return entities;
         }
     }
 }
