@@ -31,6 +31,11 @@ package uk.co.zutty.ld29 {
             FP.camera.y = 0;
             add(_player);
 
+            var whale:Whale = new Whale();
+            whale.x = 1200;
+            whale.y = 100;
+            add(whale);
+
             add(_darkness);
 
             add(new Sky());
