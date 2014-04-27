@@ -26,7 +26,7 @@ package uk.co.zutty.ld29 {
         private var _lightMap:BitmapData = new BitmapData(FP.width + MARGIN, FP.height + MARGIN, true, 0);
         private var _lightMapRect:Rectangle = _lightMap.rect;
 
-        public function updateLightMap(startAlpha:Number, endAlpha:Number, flipped:Boolean):void {
+        public function updateLightMap(startAlpha:Number, endAlpha:Number, flipped:Boolean, lamp:Boolean):void {
             var type:String = GradientType.LINEAR;
             var colors:Array = [0x000000, 0x000000];
             var alphas:Array = [startAlpha, endAlpha];
@@ -49,14 +49,16 @@ package uk.co.zutty.ld29 {
             _lightMap.fillRect(_lightMapRect, 0);
             _lightMap.draw(shape);
 
-            FP.matrix.identity();
-            FP.matrix.tx = _lightMapRect.width / 2;
-            var offX:Number = _lampBitmap.width + 6;
-            FP.matrix.tx += flipped ? offX : -offX;
-            FP.matrix.ty = -(_lampBitmap.height / 2) + (_lightMapRect.height / 2) + 2;
-            FP.matrix.a = flipped ? -1 : 1;
+            if(lamp) {
+                FP.matrix.identity();
+                FP.matrix.tx = _lightMapRect.width / 2;
+                var offX:Number = _lampBitmap.width + 6;
+                FP.matrix.tx += flipped ? offX : -offX;
+                FP.matrix.ty = -(_lampBitmap.height / 2) + (_lightMapRect.height / 2) + 2;
+                FP.matrix.a = flipped ? -1 : 1;
 
-            _lightMap.draw(_lampBitmap, FP.matrix, null, BlendMode.ERASE);
+                _lightMap.draw(_lampBitmap, FP.matrix, null, BlendMode.ERASE);
+            }
         }
 
         override public function render(target:BitmapData, point:Point, camera:Point):void {

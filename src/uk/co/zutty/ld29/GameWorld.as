@@ -60,6 +60,7 @@ package uk.co.zutty.ld29 {
             _darkness.y = _player.y;
             _darkness.depth = _player.y / DARKNESS_DEPTH;
             _darkness.flipped = _player.flipped;
+            _darkness.lamp = _player.lampOn;
 
             _cameraTween.tween(FP.camera, {x: _player.x - FP.halfWidth, y: _player.y - FP.halfHeight}, CAMERA_TWEEN_DELAY, Ease.quadInOut);
 

@@ -6,6 +6,7 @@ package uk.co.zutty.ld29 {
 
         private var _lightMap:LightMap = new LightMap();
         private var _depth:Number = 0;
+        private var _lamp:Boolean = false;
         private var _flipped:Boolean = false;
 
         public function Darkness() {
@@ -27,8 +28,15 @@ package uk.co.zutty.ld29 {
             }
         }
 
+        public function set lamp(value:Boolean):void {
+            if(value != _lamp) {
+                _lamp = value;
+                updateLightmap();
+            }
+        }
+
         private function updateLightmap():void {
-            _lightMap.updateLightMap(FP.clamp(_depth - 0.1, 0, 1), FP.clamp(_depth + 0.1, 0, 1), _flipped);
+            _lightMap.updateLightMap(FP.clamp(_depth - 0.1, 0, 1), FP.clamp(_depth + 0.1, 0, 1), _flipped, _lamp);
         }
     }
 }
