@@ -29,22 +29,25 @@ package uk.co.zutty.ld29 {
         private var _salvageText:Text = new Text("0000000");
 
         public function Hud() {
-            _healthSpritemap1.add("empty", [0], 1, false);
-            _healthSpritemap1.add("full", [1], 1, false);
+            _healthSpritemap1.add("full", [0], 1, false);
+            _healthSpritemap1.add("empty", [1], 1, false);
+            _healthSpritemap1.add("alert", [1,2], 0.03);
             _healthSpritemap1.play("full");
             _healthSpritemap1.x = 179;
             _healthSpritemap1.y = 3;
             addGraphic(_healthSpritemap1);
 
-            _healthSpritemap2.add("empty", [0], 1, false);
-            _healthSpritemap2.add("full", [1], 1, false);
+            _healthSpritemap2.add("full", [0], 1, false);
+            _healthSpritemap2.add("empty", [1], 1, false);
+            _healthSpritemap2.add("alert", [1,2], 0.03);
             _healthSpritemap2.play("full");
             _healthSpritemap2.x = 189;
             _healthSpritemap2.y = 3;
             addGraphic(_healthSpritemap2);
 
-            _healthSpritemap3.add("empty", [0], 1, false);
-            _healthSpritemap3.add("full", [1], 1, false);
+            _healthSpritemap3.add("full", [0], 1, false);
+            _healthSpritemap3.add("empty", [1], 1, false);
+            _healthSpritemap3.add("alert", [1,2], 0.03);
             _healthSpritemap3.play("full");
             _healthSpritemap3.x = 199;
             _healthSpritemap3.y = 3;
@@ -104,9 +107,15 @@ package uk.co.zutty.ld29 {
         }
 
         public function set health(value:int):void {
-            _healthSpritemap1.play(value >= 1 ? "full" : "empty");
-            _healthSpritemap2.play(value >= 2 ? "full" : "empty");
-            _healthSpritemap3.play(value >= 3 ? "full" : "empty");
+            if(value == 1) {
+                _healthSpritemap1.play("alert");
+                _healthSpritemap2.play("alert");
+                _healthSpritemap3.play("alert");
+            } else {
+                _healthSpritemap1.play(value >= 2 ? "full" : "empty");
+                _healthSpritemap2.play(value >= 3 ? "full" : "empty");
+                _healthSpritemap3.play(value >= 4 ? "full" : "empty");
+            }
 
             if(value <= 0) {
                 _gameOverList.visible = true;

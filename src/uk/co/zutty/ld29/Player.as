@@ -18,7 +18,7 @@ package uk.co.zutty.ld29 {
 
         private static const SPEED:Number = 0.8;
         private static const RATE_OF_FIRE:uint = 20;
-        private static const STARTING_HEALTH:int = 3;
+        private static const STARTING_HEALTH:int = 4;
         private static const LAMP_DEPTH:Number = 200;
 
         private var _spritemap:Spritemap = new Spritemap(PLAYER_SUB_IMAGE, 16, 16);
