@@ -39,6 +39,10 @@ package uk.co.zutty.ld29 {
             addTween(_cameraTween, true);
         }
 
+        public function get player():Player {
+            return _player;
+        }
+
         override public function update():void {
             super.update();
 

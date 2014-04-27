@@ -1,4 +1,8 @@
 package uk.co.zutty.ld29 {
+    import flash.geom.Point;
+
+    import net.flashpunk.Entity;
+
     import net.flashpunk.Entity;
     import net.flashpunk.FP;
     import net.flashpunk.graphics.Spritemap;
@@ -12,6 +16,13 @@ package uk.co.zutty.ld29 {
 
         private static const SPEED:Number = 0.8;
         private static const RATE_OF_FIRE:uint = 20;
+        private static const AGGRO_RANGE:Number = 100;
+        private static const CLOSE_RANGE:Number = 50;
+        private static const FIRE_RANGE:Number = 70;
+        private static const RETREAT_RANGE:Number = 200;
+
+        private static const STATE_IDLE:int = 0;
+        private static const STATE_ATTACK:int = 0;
 
         private var _spritemap:Spritemap = new Spritemap(BADDIE_SUB_IMAGE, 16, 16);
         private var _bubbleEmitter:BubbleEmitter = new BubbleEmitter();
@@ -19,6 +30,9 @@ package uk.co.zutty.ld29 {
         private var _dead:Boolean = false;
         public var _sinkSpeed:Number = 0;
         private var _sinkSpeedTween:VarTween = new VarTween();
+        private var _spawnX:Number = 0;
+        private var _spawnY:Number = 0;
+        private var _state:int = STATE_IDLE;
 
         public function Enemy() {
             _spritemap.add("idle", [1], 1, false);
@@ -42,6 +56,13 @@ package uk.co.zutty.ld29 {
             _dead = false;
         }
 
+        public function spawn(x:Number, y:Number):void {
+            _spawnX = x;
+            _spawnY = y;
+            this.x = x;
+            this.y = y;
+        }
+
         public function hit(damage:int):void {
             _dead = true;
             _spritemap.play("dead");
@@ -49,9 +70,35 @@ package uk.co.zutty.ld29 {
             _sinkSpeedTween.start();
         }
 
+        private function _moveTowards(x:Number, y:Number) {
+            moveTowards(x,  y, SPEED);
+            _spritemap.flipped = this.x < x;
+            _bubbleEmitter.emitBubbles(_spritemap.flipped, 6, -10, -2);
+        }
+
         override public function update():void {
+            var player:Player = (FP.world as GameWorld).player;
+            ++_fireTimer;
+
             if(_dead) {
-                y += _sinkSpeed;
+                moveBy(0, _sinkSpeed, "terrain");
+            } else {
+                var spawnDist:Number = player.distanceToPoint(_spawnX, _spawnY);
+                var dist:Number = distanceFrom(player);
+
+                if(spawnDist > RETREAT_RANGE && !(x == _spawnX && y == _spawnY)) {
+                    _moveTowards(_spawnX,  _spawnY);
+                } else if(dist <= AGGRO_RANGE && dist > CLOSE_RANGE) {
+                    _moveTowards(player.x,  player.y);
+                }
+
+                if(_fireTimer > RATE_OF_FIRE && dist <= FIRE_RANGE) {
+                    _fireTimer = 0;
+                    var torpedo:Torpedo = FP.world.create(Torpedo) as Torpedo;
+                    torpedo.x = x;
+                    torpedo.y = y;
+                    torpedo.flipped = _spritemap.flipped;
+                }
             }
         }
     }

@@ -46,9 +46,8 @@ package uk.co.zutty.ld29 {
             var enemies:Vector.<Enemy> = new Vector.<Enemy>();
 
             for each(var obj:XML in _xmlData["objects"][0].enemy) {
-                var enemy:Entity = FP.world.create(Enemy, false);
-                enemy.x = obj.@x;
-                enemy.y = obj.@y;
+                var enemy:Enemy = FP.world.create(Enemy, false) as Enemy;
+                enemy.spawn(obj.@x, obj.@y);
                 enemies.push(enemy);
             }
 
