@@ -20,6 +20,7 @@ package uk.co.zutty.ld29 {
         private static const CLOSE_RANGE:Number = 50;
         private static const FIRE_RANGE:Number = 70;
         private static const RETREAT_RANGE:Number = 200;
+        private static const Y_ALIGN_RANGE:Number = 16;
 
         private static const STATE_IDLE:int = 0;
         private static const STATE_ATTACK:int = 0;
@@ -71,7 +72,7 @@ package uk.co.zutty.ld29 {
         }
 
         private function _moveTowards(x:Number, y:Number) {
-            moveTowards(x,  y, SPEED);
+            moveTowards(x,  y, SPEED, "terrain");
             _spritemap.flipped = this.x < x;
             _bubbleEmitter.emitBubbles(_spritemap.flipped, 6, -10, -2);
         }
@@ -85,14 +86,18 @@ package uk.co.zutty.ld29 {
             } else {
                 var spawnDist:Number = player.distanceToPoint(_spawnX, _spawnY);
                 var dist:Number = distanceFrom(player);
+                var yDist:Number = player.y - y;
 
                 if(spawnDist > RETREAT_RANGE && !(x == _spawnX && y == _spawnY)) {
                     _moveTowards(_spawnX,  _spawnY);
                 } else if(dist <= AGGRO_RANGE && dist > CLOSE_RANGE) {
                     _moveTowards(player.x,  player.y);
+                } else if(dist <= AGGRO_RANGE) {
+                    _moveTowards(x, player.y);
+                    _spritemap.flipped = x < player.x;
                 }
 
-                if(_fireTimer > RATE_OF_FIRE && dist <= FIRE_RANGE) {
+                if(_fireTimer > RATE_OF_FIRE && dist <= FIRE_RANGE && yDist <= Y_ALIGN_RANGE) {
                     _fireTimer = 0;
                     var torpedo:Torpedo = FP.world.create(Torpedo) as Torpedo;
                     torpedo.x = x;
