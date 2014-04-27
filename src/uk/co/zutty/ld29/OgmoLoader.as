@@ -12,7 +12,7 @@ package uk.co.zutty.ld29 {
         [Embed(source="/tiles.png")]
         private static const TILES_IMAGE:Class;
 
-        private static const TERRAIN_LAYER_NAME:String = "parallax";
+        private static const TERRAIN_LAYER_NAME:String = "ground";
         private static const TILE_SIZE:int = 24;
 
         private var _xmlData:XML;
