@@ -9,7 +9,7 @@ package uk.co.zutty.ld29 {
     import net.flashpunk.tweens.misc.VarTween;
     import net.flashpunk.utils.Ease;
 
-    public class Enemy extends Entity implements Destructable {
+    public class Enemy extends Entity implements Destructable, Salvage {
 
         [Embed(source="/baddie_sub.png")]
         private static const BADDIE_SUB_IMAGE:Class;
@@ -21,8 +21,9 @@ package uk.co.zutty.ld29 {
         private static const FIRE_RANGE:Number = 70;
         private static const RETREAT_RANGE:Number = 200;
         private static const Y_ALIGN_RANGE:Number = 16;
+        private static const SALVAGE_VALUE:Number = 50;
 
-        private var _spritemap:Spritemap = new Spritemap(BADDIE_SUB_IMAGE, 16, 16);
+    private var _spritemap:Spritemap = new Spritemap(BADDIE_SUB_IMAGE, 16, 16);
         private var _bubbleEmitter:BubbleEmitter = new BubbleEmitter();
         private var _fireTimer:uint = RATE_OF_FIRE;
         private var _dead:Boolean = false;
@@ -30,6 +31,7 @@ package uk.co.zutty.ld29 {
         private var _sinkSpeedTween:VarTween = new VarTween();
         private var _spawnX:Number = 0;
         private var _spawnY:Number = 0;
+        private var _salvageClaimed:Boolean = false;
 
         public function Enemy() {
             _spritemap.add("idle", [1], 1, false);
@@ -71,6 +73,23 @@ package uk.co.zutty.ld29 {
             moveTowards(x,  y, SPEED, "terrain");
             _spritemap.flipped = this.x < x;
             _bubbleEmitter.emitBubbles(_spritemap.flipped, 6, -10, -2);
+        }
+
+        override public function moveCollideY(e:Entity):Boolean {
+            if(_dead) {
+                type = "salvage";
+                active = false;
+            }
+            return true;
+        }
+
+        public function get claimed():Boolean {
+            return _salvageClaimed;
+        }
+
+        public function claim():int {
+            _salvageClaimed = true;
+            return SALVAGE_VALUE;
         }
 
         override public function update():void {
