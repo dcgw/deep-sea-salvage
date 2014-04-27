@@ -25,7 +25,9 @@ package uk.co.zutty.ld29 {
 
         public function GameWorld() {
             var ogmoLevel:OgmoLoader = new OgmoLoader();
+            add(ogmoLevel.background);
             add(ogmoLevel.terrain);
+            add(ogmoLevel.foreground);
             for each(var entities:Entity in ogmoLevel.entities) {
                 add(entities);
             }

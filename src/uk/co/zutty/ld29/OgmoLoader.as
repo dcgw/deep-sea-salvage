@@ -42,6 +42,33 @@ package uk.co.zutty.ld29 {
             return terrain;
         }
 
+        public function get background():Entity {
+            var background:Entity = getLayer("background");
+            background.layer = 700;
+            return background;
+        }
+
+        public function get foreground():Entity {
+            var foreground:Entity = getLayer("foreground");
+            foreground.layer = 160;
+            return foreground;
+        }
+
+        public function getLayer(name:String):Entity {
+            var layer:Entity = new Entity();
+
+            var tilemap:Tilemap = new Tilemap(TILES_IMAGE, _xmlData.width, _xmlData.height, TILE_SIZE, TILE_SIZE);
+
+            for each(var tile:XML in _xmlData[name][0].tile) {
+                var idx:uint = tilemap.getIndex(tile.@tx / TILE_SIZE, tile.@ty / TILE_SIZE);
+                tilemap.setTile(tile.@x / TILE_SIZE, tile.@y / TILE_SIZE, idx);
+            }
+
+            layer.addGraphic(tilemap);
+
+            return layer;
+        }
+
         public function get entities():Vector.<Entity> {
             var entities:Vector.<Entity> = new Vector.<Entity>();
 
@@ -64,10 +91,17 @@ package uk.co.zutty.ld29 {
                 entities.push(shark);
             }
 
+            for each(var obj:XML in _xmlData["objects"][0].shipwreck) {
+                var shipwreck:Entity = FP.world.create(Shipwreck, false);
+                shipwreck.x = obj.@x;
+                shipwreck.y = obj.@y;
+                entities.push(shipwreck);
+            }
+
             for each(var obj:XML in _xmlData["objects"][0].treasure) {
                 var treasure:Treasure = FP.world.create(Treasure, false) as Treasure;
                 treasure.x = obj.@x;
-                treasure.y = obj.@y;
+                treasure.y = obj.@y - 5;
                 treasure.value = obj.@value;
                 entities.push(treasure);
             }
