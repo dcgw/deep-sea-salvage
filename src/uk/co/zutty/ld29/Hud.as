@@ -12,6 +12,8 @@ package uk.co.zutty.ld29 {
         private static const HEALTH_INDICATOR_IMAGE:Class;
         [Embed(source="/press_x.png")]
         private static const PRESS_X_IMAGE:Class;
+        [Embed(source="/press_c.png")]
+        private static const PRESS_C_IMAGE:Class;
         [Embed(source="/coin_icon.png")]
         private static const COIN_IMAGE:Class;
 
@@ -20,6 +22,9 @@ package uk.co.zutty.ld29 {
         private var _healthSpritemap3:Spritemap = new Spritemap(HEALTH_INDICATOR_IMAGE, 8, 8);
 
         private var _gameOverList:Graphiclist = new Graphiclist();
+
+        private var _interactText:Text = new Text("interact");
+        private var _interactList:Graphiclist = new Graphiclist();
 
         private var _salvageText:Text = new Text("0000000");
 
@@ -66,6 +71,19 @@ package uk.co.zutty.ld29 {
             pressXToContinueSpritemap.y = FP.halfHeight + 10;
             _gameOverList.add(pressXToContinueSpritemap);
 
+            _interactText.size = 8;
+            _interactText.x = 10;
+            _interactList.add(_interactText);
+            var interactButtonSpritemap:Spritemap = new Spritemap(PRESS_C_IMAGE, 8, 8);
+            interactButtonSpritemap.add("press_c", [0,1], 0.03);
+            interactButtonSpritemap.play("press_c");
+            interactButtonSpritemap.y = 1;
+            _interactList.add(interactButtonSpritemap);
+            _interactList.x = FP.halfWidth - 25;
+            _interactList.y = FP.halfHeight + 25;
+            _interactList.visible = false;
+            addGraphic(_interactList);
+
             var coinIcon:Image = new Image(COIN_IMAGE);
             coinIcon.x = 3;
             coinIcon.y = 3;
@@ -98,6 +116,14 @@ package uk.co.zutty.ld29 {
         public function set salvage(value:int):void {
             var strVal:String = "" + value;
             _salvageText.text = "0000000".substring(0, 7 - strVal.length) + strVal;
+        }
+
+        public function set interactText(value:String):void {
+            _interactText.text = value;
+        }
+
+        public function set showInteract(value:Boolean):void {
+            _interactList.visible = value;
         }
     }
 }

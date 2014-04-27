@@ -13,6 +13,7 @@ package uk.co.zutty.ld29 {
 
         private var _spritemap:Spritemap = new Spritemap(TREASURE_IMAGE, 16, 16);
         private var _claimed:Boolean = false;
+        private var _opened:Boolean = false;
         private var _value:int = 500;
 
         public function Treasure() {
@@ -33,6 +34,7 @@ package uk.co.zutty.ld29 {
         override public function added():void {
             _spritemap.play("closed");
             _claimed = false;
+            _opened = false;
         }
 
         public function set value(value:int):void {
@@ -43,27 +45,37 @@ package uk.co.zutty.ld29 {
             return _claimed;
         }
 
+        public function get interactText():String {
+            return _opened ? "Salvage" : "Open";
+        }
+
         public function claim():int {
             if(_claimed) {
                 return 0;
             }
 
-            var openAnim:String;
+            if(!_opened) {
+                var openAnim:String;
 
-            if(_value == 0) {
-                openAnim = "open_empty";
-            } else if(_value < VALUE_THRESHOLD_SOME) {
-                openAnim = "open_1";
-            } else if(_value < VALUE_THRESHOLD_LOTS) {
-                openAnim = "open_2";
+                if(_value == 0) {
+                    openAnim = "open_empty";
+                    _claimed = true;
+                } else if(_value < VALUE_THRESHOLD_SOME) {
+                    openAnim = "open_1";
+                } else if(_value < VALUE_THRESHOLD_LOTS) {
+                    openAnim = "open_2";
+                } else {
+                    openAnim = "open_3";
+                }
+
+                _spritemap.play(openAnim);
+                _opened = true;
+                return 0;
             } else {
-                openAnim = "open_3";
+                _spritemap.play("open_empty");
+                _claimed = true;
+                return _value;
             }
-
-            _spritemap.play(openAnim);
-            _claimed = true;
-
-            return _value;
         }
     }
 }

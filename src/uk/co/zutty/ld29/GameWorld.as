@@ -51,6 +51,10 @@ package uk.co.zutty.ld29 {
             return _player;
         }
 
+        public function get hud():Hud {
+            return _hud;
+        }
+
         override public function update():void {
             super.update();
 

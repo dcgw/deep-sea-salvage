@@ -3,7 +3,9 @@ package uk.co.zutty.ld29 {
     import net.flashpunk.Entity;
     import net.flashpunk.FP;
     import net.flashpunk.graphics.Emitter;
+    import net.flashpunk.graphics.Graphiclist;
     import net.flashpunk.graphics.Spritemap;
+    import net.flashpunk.graphics.Text;
     import net.flashpunk.tweens.misc.VarTween;
     import net.flashpunk.utils.Ease;
     import net.flashpunk.utils.Input;
@@ -143,9 +145,15 @@ package uk.co.zutty.ld29 {
                 x = GameWorld.EAST_BORDER;
             }
 
-            if(Input.pressed("salvage")) {
-                var salvage:Salvage = collide("salvage", x, y) as Salvage;
-                if(salvage && !salvage.claimed) {
+            var hud:Hud = (FP.world as GameWorld).hud;
+            hud.showInteract = false;
+
+            var salvage:Salvage = collide("salvage", x, y) as Salvage;
+            if(salvage && !salvage.claimed) {
+                hud.interactText = salvage.interactText;
+                hud.showInteract = true;
+
+                if(Input.pressed("salvage")) {
                     _salvage += salvage.claim();
                 }
             }

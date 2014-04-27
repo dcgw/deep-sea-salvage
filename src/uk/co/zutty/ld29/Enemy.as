@@ -92,6 +92,10 @@ package uk.co.zutty.ld29 {
             return SALVAGE_VALUE;
         }
 
+        public function get interactText():String {
+            return "Salvage";
+        }
+
         override public function update():void {
             var player:Player = (FP.world as GameWorld).player;
             ++_fireTimer;
