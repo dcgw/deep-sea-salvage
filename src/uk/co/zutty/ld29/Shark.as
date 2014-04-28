@@ -13,8 +13,8 @@ package uk.co.zutty.ld29 {
         private static const IDLE_SPEED:Number = 0.3;
         private static const PURSUE_SPEED:Number = 0.7;
         private static const ATTACK_DELAY:Number = 50;
-        private static const AGGRO_RANGE:Number = 60;
-        private static const RETREAT_RANGE:Number = 120;
+        private static const AGGRO_RANGE:Number = 80;
+        private static const RETREAT_RANGE:Number = 160;
 
         private var _spritemap:Spritemap = new Spritemap(SHARK_IMAGE, 64, 24);
         private var _dead:Boolean = false;
