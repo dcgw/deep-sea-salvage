@@ -26,7 +26,14 @@
 		<object name="whale" image="whale_placeholder.png" width="96" height="32"/>
 		<object name="shark" image="shark_placeholder.png" width="64" height="24"/>
 		<object name="shipwreck" image="shipwreck.png" width="72" height="24"/>
+		<object name="boat_wreck" image="shipwreck2.png" width="72" height="24"/>
+		<object name="capital_sub" image="capital_sub_placeholder.png" width="72" height="24"/>
 		<object name="treasure" image="treasure_placeholder.png" width="16" height="16">
+		    <values>
+		        <integer name="value"/>
+		    </values>
+		</object>
+		<object name="crate" image="crate.png" width="16" height="16">
 		    <values>
 		        <integer name="value"/>
 		    </values>

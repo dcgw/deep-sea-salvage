@@ -91,11 +91,25 @@ package uk.co.zutty.ld29 {
                 entities.push(shark);
             }
 
+            for each(var obj:XML in _xmlData["objects"][0].boat_wreck) {
+                var boatWreck:Entity = FP.world.create(BoatWreck, false);
+                boatWreck.x = obj.@x;
+                boatWreck.y = obj.@y;
+                entities.push(boatWreck);
+            }
+
             for each(var obj:XML in _xmlData["objects"][0].shipwreck) {
                 var shipwreck:Entity = FP.world.create(Shipwreck, false);
                 shipwreck.x = obj.@x;
                 shipwreck.y = obj.@y;
                 entities.push(shipwreck);
+            }
+
+            for each(var obj:XML in _xmlData["objects"][0].capital_sub) {
+                var capitalSub:Entity = FP.world.create(EnemyCapitalSubmarine, false);
+                capitalSub.x = obj.@x;
+                capitalSub.y = obj.@y;
+                entities.push(capitalSub);
             }
 
             for each(var obj:XML in _xmlData["objects"][0].treasure) {
@@ -104,6 +118,14 @@ package uk.co.zutty.ld29 {
                 treasure.y = obj.@y - 5;
                 treasure.value = obj.@value;
                 entities.push(treasure);
+            }
+
+            for each(var obj:XML in _xmlData["objects"][0].crate) {
+                var crate:Crate = FP.world.create(Crate, false) as Crate;
+                crate.x = obj.@x;
+                crate.y = obj.@y - 5;
+                crate.value = obj.@value;
+                entities.push(crate);
             }
 
             return entities;
