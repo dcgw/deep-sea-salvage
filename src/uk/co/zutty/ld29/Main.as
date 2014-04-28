@@ -10,8 +10,8 @@ package uk.co.zutty.ld29 {
             FP.screen.scale = 4;
             FP.screen.color = 0x6699E6;
 
-            FP.console.enable();
-            FP.console.debug = true;
+            //FP.console.enable();
+            //FP.console.debug = true;
 
             FP.world = new TitleWorld();
         }
