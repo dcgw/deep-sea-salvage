@@ -946,7 +946,7 @@
     <enemy x="816" y="144"/>
     <enemy x="1944" y="384"/>
     <enemy x="2160" y="1032"/>
-    <enemy x="2064" y="1008"/>
+    <enemy x="1944" y="312"/>
     <enemy x="1680" y="624"/>
     <whale x="2232" y="216"/>
     <treasure x="408" y="456" value="300"/>
@@ -968,5 +968,9 @@
     <capital_sub x="1824" y="360"/>
     <enemy x="1776" y="360"/>
     <enemy x="1800" y="312"/>
+    <angler_fish x="1752" y="960"/>
+    <angler_fish x="1848" y="984"/>
+    <angler_fish x="1944" y="1008"/>
+    <angler_fish x="2112" y="1032"/>
   </objects>
 </level>

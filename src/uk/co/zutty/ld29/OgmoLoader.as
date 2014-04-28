@@ -91,6 +91,12 @@ package uk.co.zutty.ld29 {
                 entities.push(shark);
             }
 
+            for each(var obj:XML in _xmlData["objects"][0].angler_fish) {
+                var anglerFish:AnglerFish = FP.world.create(AnglerFish, false) as AnglerFish;
+                anglerFish.spawn(obj.@x, obj.@y);
+                entities.push(anglerFish);
+            }
+
             for each(var obj:XML in _xmlData["objects"][0].boat_wreck) {
                 var boatWreck:Entity = FP.world.create(BoatWreck, false);
                 boatWreck.x = obj.@x;
