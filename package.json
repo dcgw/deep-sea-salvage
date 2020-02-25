@@ -14,6 +14,7 @@
     "@softwareventures/tsconfig": "^2.1.0",
     "@softwareventures/tslint-rules": "^0.7.1",
     "@softwareventures/webpack-config": "^0.20.8",
+    "ava": "^3.4.0",
     "cz-conventional-changelog": "3.1.0",
     "ts-loader": "^6.2.1",
     "ts-node": "^8.6.2",
@@ -27,6 +28,14 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
   },
   "dependencies": {
     "@types/domready": "^1.0.0",
