@@ -1,3 +1,5 @@
-*.iml
-.idea/
-out/
+/.idea
+/node_modules
+yarn-error.log
+npm-debug.log
+
