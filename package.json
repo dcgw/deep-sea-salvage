@@ -3,12 +3,22 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:dcgw/deep-sea-salvage.git",
-  "author": "Zutty <george.weller@gmail.com>",
-  "license": "MIT",
+  "author": {
+    "name": "George Weller",
+    "email": "george.weller@gmail.com"
+  },
+  "private": true,
+  "license": "UNLICENSED",
   "scripts": {
     "build": "webpack --env.production",
     "start": "webpack-dev-server --open",
     "test": "tslint --project . && ava"
+  },
+  "dependencies": {
+    "@types/domready": "^1.0.0",
+    "domready": "^1.0.8",
+    "excalibur": "^0.23.0",
+    "tslib": "^1.11.0"
   },
   "devDependencies": {
     "@softwareventures/tsconfig": "^2.1.0",
@@ -36,11 +46,5 @@
     "require": [
       "ts-node/register"
     ]
-  },
-  "dependencies": {
-    "@types/domready": "^1.0.0",
-    "domready": "^1.0.8",
-    "excalibur": "^0.23.0",
-    "tslib": "^1.11.0"
   }
 }
