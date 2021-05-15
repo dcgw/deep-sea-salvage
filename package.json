@@ -17,22 +17,21 @@
   "dependencies": {
     "@types/domready": "^1.0.0",
     "domready": "^1.0.8",
-    "excalibur": "^0.23.0",
+    "excalibur": "0.24.4",
     "tslib": "^1.11.0"
   },
   "devDependencies": {
-    "@softwareventures/tsconfig": "^2.1.0",
     "@softwareventures/tslint-rules": "^0.7.1",
-    "@softwareventures/webpack-config": "^0.20.8",
+    "@softwareventures/webpack-config": "^3.1.1",
     "ava": "^3.4.0",
     "cz-conventional-changelog": "3.1.0",
     "ts-loader": "^6.2.1",
     "ts-node": "^8.6.2",
     "tslint": "^6.0.0",
     "typescript": "^3.8.2",
-    "webpack": "^4.41.6",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.2"
   },
   "config": {
     "commitizen": {
