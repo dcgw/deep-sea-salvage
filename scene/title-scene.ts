@@ -28,5 +28,9 @@ export default class TitleScene extends Scene {
         this.add(label("Press", cx - 35, cy + 32));
         this.add(label("to start", cx + 5, cy + 32));
         this.add(pressButton("x", cx - 7, cy + 24));
+
+        this.on("activate", () => {
+            engine.input.keyboard.once("press", () => engine.goToScene("game"));
+        });
     }
 }

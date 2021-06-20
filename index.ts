@@ -1,6 +1,7 @@
 import domready = require("domready");
 import {Color, DisplayMode, Engine, Loader} from "excalibur";
 import resources from "./resources";
+import GameScene from "./scene/game-scene";
 import TitleScene from "./scene/title-scene";
 
 domready(() => {
@@ -22,6 +23,7 @@ domready(() => {
 
     engine.start(new Loader(Object.values(resources))).then(() => {
         engine.addScene("title", new TitleScene(engine));
+        engine.addScene("game", new GameScene(engine));
         engine.goToScene("title");
     }, err => console.log("", err));
 });
